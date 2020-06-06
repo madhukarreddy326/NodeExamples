@@ -10,6 +10,9 @@
   "author": "Mahukar <madhukar.reddy326@gmail.com> (https://github.com/madhukarreddy326/NodeExamples.git)",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "jade": "^1.11.0",
+    "pug": "^3.0.0",
     "request": "^2.88.2"
   }
 }
