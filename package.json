@@ -1,0 +1,11 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "deomo module to export",
+  "main": "Addition.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mahukar <madhukar.reddy326@gmail.com> (https://github.com/madhukarreddy326/NodeExamples.git)",
+  "license": "ISC"
+}
