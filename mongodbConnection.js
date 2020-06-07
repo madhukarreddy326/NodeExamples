@@ -23,7 +23,7 @@ db.collection('Employee').updateOne(
     cursor.each(function(err,doc){
 console.log(doc);
     });
-console.log("Connected");
+console.log("Connected node");
 
 // //to retrieve one reocrd
 var cursor = db.collection('Employee').find({EmployeeName:"NewEmployee"});
