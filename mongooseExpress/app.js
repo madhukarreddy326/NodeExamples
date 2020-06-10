@@ -26,6 +26,22 @@ Book.find({}).exec(function(err,books){
 })
 });
 
+app.get('/books/:id',function(req,res){
+console.log('gettign one book"');
+Book.findOne({
+    _id:req.params.id}
+).exec(function(err,book){
+if(err)
+{
+    res.send('error occured book not found');    
+}
+else{
+    console.log(book);
+    res.json(book);
+}
+});
+});
+
 app.listen(port,function(){
     console.log("app is listening on port:"+port);
 })
