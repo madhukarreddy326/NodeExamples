@@ -7,6 +7,8 @@ var Book = require('./Book.model.js');
 var db = 'mongodb://localhost/example'
 
 mongoose.connect(db);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 var port = 8090;
 
@@ -14,6 +16,8 @@ app.get('/',function(req,res){
 console.log('this is default method called');
 res.send('you are calling the default method');
 });
+
+//get all books from the data base
 app.get('/books',function(req,res){
 console.log('getting all books');
 Book.find({}).exec(function(err,books){
@@ -25,7 +29,7 @@ Book.find({}).exec(function(err,books){
     }
 })
 });
-
+//get singlle book details
 app.get('/books/:id',function(req,res){
 console.log('gettign one book"');
 Book.findOne({
@@ -41,6 +45,38 @@ else{
 }
 });
 });
+
+//one method of createing post method usign call back
+app.post('/book',function(req,res){
+var newBook = new Book();
+newBook.title=req.body.title;
+newBook.author=req.body.author;
+newBook.category=req.body.category;
+newBook.save(function(err,book){
+    if(err){
+        res.send('Error Saving book:unable to save book');
+        console.log('erro saving book:unable to save book')        ;        
+    }
+    else{
+        console.log(book);
+        res.send(book);
+    }
+});
+});
+app.post('/book2',function(req,res){
+    Book.create(req.body,function(err,book){
+        if(err){
+            console.log('error while saving');
+            res.send('unable to save book');
+        }
+        else{
+            console.log(book);
+            res.send(book);
+        }
+    });
+})
+
+
 
 app.listen(port,function(){
     console.log("app is listening on port:"+port);
