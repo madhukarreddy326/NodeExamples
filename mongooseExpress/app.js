@@ -92,6 +92,22 @@ app.put('/books/:id',function(req,res){
         }
     )
 });
+//to delte book
+app.delete('/books/:id',function(req,res)
+{
+    Book.findOneAndDelete({_id:req.params.id},
+        function(err,db)
+        {
+            if(err)
+            res.send(err);
+            else
+            {
+                console.log('deleted book:'+db);
+                res.json(db);
+            }
+
+        })
+})
 
 
 app.listen(port,function(){
