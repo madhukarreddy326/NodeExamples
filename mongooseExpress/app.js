@@ -75,7 +75,23 @@ app.post('/book2',function(req,res){
         }
     });
 })
-
+//update sigle book
+app.put('/books/:id',function(req,res){
+    Book.findOneAndUpdate({
+        _id:req.params.id},
+        {$set:{title:req.body.title}},{upset:true},function(err,newBook){
+                if(err)
+                {
+                    console.log('book not find');                    
+                }
+                else
+                {
+                    console.log(newBook);
+                    res.send(newBook);
+                }
+        }
+    )
+});
 
 
 app.listen(port,function(){
