@@ -1,11 +1,29 @@
 console.log("starting");
-getUser(1,(user)=>{
-    console.log('User:',user);
-});
-getRespositories('madhukar',(list)=>{
-    console.log('List ::',list);
-});
+getUser(1,getRepositories);
+   // console.log('User:',user);
+   
+    //console.log('List ::',list);
+    //
+//});
+//});
+
 console.log("ending");
+function getRepositories(user)
+{
+    console.log(user);
+    getRespositories(user.name,getRepos);
+}
+function getRepos(repo)
+{
+    console.log(repo);
+    getCommits(repo);
+    
+}
+function getCommits(repo)
+{
+    console.log(repo);
+}
+
 
 function getUser(id,callback)
 {    setTimeout(() =>{
