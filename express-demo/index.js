@@ -1,6 +1,10 @@
 const express = require('express');
+const logger = require('./logger');
+var authentication = require('./Authentication');
 const Joi = require('joi');
 const app = express();
+
+
 
 function validateSchema(course)
 {
@@ -12,6 +16,17 @@ function validateSchema(course)
 
 //below method is used to handle the req and response ad json
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static('public'));
+
+
+app.use(logger);
+
+app.use(authentication);
+
+
+
+
 
 const courses =[
     {id:1,name:"java"},
