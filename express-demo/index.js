@@ -27,13 +27,7 @@ if(app.get('env')=='development')
     debug('using morgan to log the request');
 }
 
-function validateSchema(course)
-{
-    const schema={
-        name:Joi.string().min(3).required()
-    };
-    return Joi.validate(course);
-}
+
 //to display the default message
 const port =process.env.PORT ||3000;
 app.listen(port,()=> debug(`started the server and listening on ${port}`));
