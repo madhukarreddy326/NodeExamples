@@ -1,4 +1,7 @@
 const express = require('express');
+const debug = require('debug')('app:startup');
+const morgan = require('morgan');
+const helmet = require('helmet');
 const logger = require('./logger');
 var authentication = require('./Authentication');
 const Joi = require('joi');
@@ -18,14 +21,18 @@ function validateSchema(course)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
-
+app.use(helmet());
 
 app.use(logger);
 
 app.use(authentication);
-
-
-
+debug(`Environment is : ${app.get('env')}`)
+debug(process.env.NODE_ENV);
+if(app.get('env')=='development')
+{
+    app.use(morgan('tiny'));//this is used to log the http request  in console
+    debug('using morgan to log the request');
+}
 
 
 const courses =[
@@ -108,4 +115,4 @@ app.get('/api/courses/:id',(req,res)=>
 const port =process.env.PORT ||3000;
 
 
-app.listen(port,()=> console.log(`started the server and listening on ${port}`));
+app.listen(port,()=> debug(`started the server and listening on ${port}`));
